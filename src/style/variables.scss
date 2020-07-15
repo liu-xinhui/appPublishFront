@@ -1,0 +1,9 @@
+$header-height: 82px;
+$color-primary: #F8BA0B;
+$border-color: #E6E6E6;
+
+@mixin gravityCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
