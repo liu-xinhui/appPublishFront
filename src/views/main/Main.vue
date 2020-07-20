@@ -27,9 +27,7 @@
       background-color: #F6F6F6;
 
       .vm-page {
-        width: 1020px;
         margin: 0 auto;
-        padding: 20px 0;
       }
     }
   }

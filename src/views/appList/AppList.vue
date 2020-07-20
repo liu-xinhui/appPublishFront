@@ -1,5 +1,5 @@
 <template>
-  <div class="main-home">
+  <div v-loading="contentLoading" class="main-home">
     <el-upload
         ref="upload"
         class="card upload"
@@ -11,32 +11,32 @@
         :on-error="uploadError"
         :on-progress="uploadProgress"
         :on-success="uploadSuccess"
-        :data="appInfo"
+        :data="uploadAppInfo"
         :action="uploadUrl">
       <div class="upload-text">
         <i class="el-icon-upload"/>
         <div>将文件拖到此处，或<em>点击上传</em></div>
       </div>
     </el-upload>
-    <div class="card app">
+    <div v-for="item in appList" :key="item.id" class="card app">
       <img
           alt="图标"
           width="100"
           height="100"
-          src="https://ali-fir-pro-icon.jappstore.com/e264100d1bc528658464e007f51faa60bcc0bdd1?auth_key=1594690594-0-0-773e1a29b8b6f3e79a226d148e3676f9&tmp=1594688794.6372583">
-      <div class="app-name">星辰物联网</div>
+          :src="item.currentVersion.icon">
+      <div class="app-name">{{item.name}}</div>
       <table>
         <tr>
           <td>短链接:</td>
-          <td>http://fir.sout.fun/iot</td>
+          <td>http://fir.sout.fun/{{item.currentVersion.shortCode}}</td>
         </tr>
         <tr>
           <td>PackageName:</td>
-          <td>com.step.netofthings</td>
+          <td>{{item.packageName}}</td>
         </tr>
         <tr>
           <td>最新版本:</td>
-          <td>esio_2.0.11 ( Build 30 )</td>
+          <td>{{item.currentVersion.versionName}} (Build {{item.currentVersion.versionCode}})</td>
         </tr>
       </table>
       <div class="app-btn">
@@ -44,8 +44,6 @@
         <el-button icon="el-icon-view" round style="margin-left: 10px">预览</el-button>
       </div>
     </div>
-    <div class="card"/>
-    <div class="card"/>
     <app-upload-dialog
         ref="appUploadDialog"
         @upload="$refs.upload.submit()"
@@ -60,11 +58,25 @@
     components: {AppUploadDialog},
     data() {
       return {
-        uploadUrl: window.config.serverUrl + "app/upload",
-        appInfo: null,
+        contentLoading: true,
+        appList: [],
+        uploadUrl: window.config.serverUrl + "apps/upload",
+        uploadAppInfo: null,
       };
     },
+    mounted() {
+      this.getAppList();
+    },
     methods: {
+      getAppList() {
+        this.contentLoading = true;
+        this.$http.get("apps").then(res => {
+          this.appList = res.data;
+          this.contentLoading = false;
+        }).catch(() => {
+          this.contentLoading = false;
+        });
+      },
       uploadChange(file) {
         if (file.status === "ready") {
           this.$refs.appUploadDialog.open(file);
@@ -82,7 +94,7 @@
         this.$message.success("上传成功");
       },
       onAppInfo(appInfo) {
-        this.appInfo = appInfo;
+        this.uploadAppInfo = appInfo;
       },
     },
   };
@@ -95,11 +107,13 @@
     font-size: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    width: 1020px;
+    margin: 0 auto;
+    padding: 20px 0;
 
     .card {
-      margin: 15px 0;
-      width: 320px;
+      margin: 12px;
+      width: 30.5%;
       cursor: pointer;
       height: 430px;
       background-color: #fff;
