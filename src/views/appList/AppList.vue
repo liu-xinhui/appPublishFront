@@ -40,7 +40,7 @@
         </tr>
       </table>
       <div class="app-btn">
-        <el-button icon="el-icon-edit" round>编辑</el-button>
+        <el-button icon="el-icon-edit" round @click="toVersion(item.id)">编辑</el-button>
         <el-button icon="el-icon-view" round style="margin-left: 10px">预览</el-button>
       </div>
     </div>
@@ -95,6 +95,11 @@
       },
       onAppInfo(appInfo) {
         this.uploadAppInfo = appInfo;
+      },
+      toVersion(id) {
+        this.$router.push({
+          path: "/apps/" + id,
+        });
       },
     },
   };
