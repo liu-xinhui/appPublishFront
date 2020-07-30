@@ -7,19 +7,85 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <!--iconfont图标-->
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1903178_i705xota0lh.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.13.2/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css">
     <!--全局配置文件-->
     <script type="text/javascript" src="<%= BASE_URL %>config.js?time=<%= Math.random()%>"></script>
-    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.runtime.min.js"></script>
-    <script src="https://cdn.bootcss.com/vue-router/3.2.0/vue-router.min.js"></script>
-    <script src="https://cdn.bootcss.com/element-ui/2.13.2/index.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      .vm-loading {
+        display: flex;
+        margin: 100px auto;
+        width: 50px;
+        height: 60px;
+        text-align: center;
+      }
+
+      .vm-loading > div {
+        background-color: #FE3C71;
+        height: 100%;
+        width: 6px;
+        margin-left: 4px;
+        -webkit-animation: stretchDelay 1.2s infinite ease-in-out;
+        animation: stretchDelay 1.2s infinite ease-in-out;
+      }
+
+      .vm-loading .rect2 {
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+      }
+
+      .vm-loading .rect3 {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+      }
+
+      .vm-loading .rect4 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+      }
+
+      .vm-loading .rect5 {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+      }
+
+      @-webkit-keyframes stretchDelay {
+        0%, 40%, 100% {
+          -webkit-transform: scaleY(0.4)
+        }
+        20% {
+          -webkit-transform: scaleY(1.0)
+        }
+      }
+
+      @keyframes stretchDelay {
+        0%, 40%, 100% {
+          transform: scaleY(0.4);
+          -webkit-transform: scaleY(0.4);
+        }
+        20% {
+          transform: scaleY(1.0);
+          -webkit-transform: scaleY(1.0);
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <div class="vm-loading">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.runtime.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.2.0/vue-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/element-ui/2.13.2/index.js"></script>
   </body>
 </html>
