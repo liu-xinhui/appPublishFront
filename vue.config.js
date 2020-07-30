@@ -12,6 +12,8 @@ module.exports = {
     // 用cdn方式引入
     config.externals({
       "vue": "Vue",
+      "vue-router": "VueRouter",
+      "element-ui": "ELEMENT",
     });
   },
 };
