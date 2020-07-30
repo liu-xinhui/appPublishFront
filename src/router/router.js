@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import loginUtil from "@/util/loginUtil";
+//import loginUtil from "@/util/loginUtil";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
@@ -16,23 +16,25 @@ const routes = [
       {path: "apps/:id", meta: {title: "应用动态"}, component: () => import("@/views/appDetail/AppVersions")},
     ],
   },
-  {path: "/login", eta: {title: "登录"}, component: () => import("@/views/main/Login")},
+  {path: "/login", meta: {title: "登录"}, component: () => import("@/views/main/Login")},
+  {path: "/preview", meta: {title: "预览"}, component: () => import("@/views/appDetail/Preview")},
 ];
 
 const router = new VueRouter({
   routes,
 });
 
-const whiteUris = ["/login"]; // 白名单,无需登录即可访问
+//const whiteUris = ["/login"]; // 白名单,无需登录即可访问
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
-  if (whiteUris.indexOf(to.path) !== -1 || loginUtil.isLogin()) {
+/*  if (whiteUris.indexOf(to.path) !== -1 || loginUtil.isLogin()) {
     // 在白名单当中或者已经登录,放行
     next();
   } else {
     toLogin(to.fullPath);
-  }
+  }*/
+  next();
 });
 
 router.afterEach(() => {

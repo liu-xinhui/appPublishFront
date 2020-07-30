@@ -18,7 +18,12 @@
             <el-button size="mini">1000</el-button>
           </el-button-group>
         </div>
-        <el-button size="default" type="primary" icon="el-icon-view" class="right-btn">
+        <el-button
+            size="default"
+            type="primary"
+            icon="el-icon-view"
+            class="right-btn"
+            @click="gotoPreview">
           预览
         </el-button>
       </div>
@@ -32,11 +37,13 @@
             placement="top"
             color="#9B9B9B">
           <div>
-            <div class="item-time"><i class="el-icon-date"/>2020-03-02 21:02:46</div>
+            <div class="item-time"><i class="el-icon-date"/>{{item.createTime}}</div>
             <pre class="change-log">{{item.changeLog}}</pre>
             <div class="item-btn-wrapper">
               <i class="el-icon-edit item-icon"/>
-              <div class="item-icon" style="margin-left: 10px"><i class="el-icon-download"/>18.20 MB</div>
+              <div class="item-icon" style="margin-left: 10px" @click="download(item.downloadUrl)">
+                <i class="el-icon-download"/>{{(item.size/1024).toFixed(2)}} MB
+              </div>
               <div class="item-icon" style="margin-left: 10px"><i class="el-icon-view"/>预览</div>
             </div>
           </div>
@@ -79,6 +86,13 @@
           this.contentLoading = false;
         });
       },
+      download(filename) {
+        window.open(window.config.serverUrl + "apps/downloadApk/" + filename);
+      },
+      gotoPreview() {
+        let routeData = this.$router.resolve({path: "/preview", query: {id: 1}});
+        window.open(routeData.href, "_blank");
+      },
     },
   };
 </script>
@@ -101,7 +115,7 @@
         &:before {
           position: absolute;
           bottom: -13px;
-          left: 38px;
+          left: 35px;
           z-index: 2;
           width: 24px;
           height: 24px;
@@ -144,8 +158,15 @@
           padding: 0 11px;
           border-radius: 15px;
           cursor: pointer;
+
+          &:hover {
+            background-color: $color-primary;
+            color: white;
+            border: 1px solid white;
+          }
         }
-        i{
+
+        i {
           margin-right: 4px;
         }
       }
@@ -161,7 +182,7 @@
         border: none;
         background-color: transparent;
         color: #4a4a4a;
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         line-height: 20px;
       }
     }
