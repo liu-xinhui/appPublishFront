@@ -20,7 +20,7 @@
         </div>
         <el-button
             size="default"
-            type="primary"
+            type="success"
             icon="el-icon-view"
             class="right-btn"
             @click="gotoPreview">

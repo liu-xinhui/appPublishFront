@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 //import loginUtil from "@/util/loginUtil";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 
 Vue.use(VueRouter);
 
@@ -27,7 +25,6 @@ const router = new VueRouter({
 //const whiteUris = ["/login"]; // 白名单,无需登录即可访问
 
 router.beforeEach((to, from, next) => {
-  NProgress.start();
 /*  if (whiteUris.indexOf(to.path) !== -1 || loginUtil.isLogin()) {
     // 在白名单当中或者已经登录,放行
     next();
@@ -35,10 +32,6 @@ router.beforeEach((to, from, next) => {
     toLogin(to.fullPath);
   }*/
   next();
-});
-
-router.afterEach(() => {
-  NProgress.done();
 });
 
 export const toLogin = () => {
