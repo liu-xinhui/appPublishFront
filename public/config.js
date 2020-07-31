@@ -4,10 +4,10 @@ var vueEnv = {
   active: "dev",
   //开发环境
   dev: {
-    serverUrl: "http://127.0.0.1:8060/",
+    serverUrl: "http://127.0.0.1:8060/api/",
   },
   prod: {
-    serverUrl: "http://127.0.0.1:8060/",
+    serverUrl: "http://127.0.0.1:8060/api/",
   },
 };
 

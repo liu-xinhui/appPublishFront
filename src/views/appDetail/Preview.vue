@@ -54,11 +54,13 @@
     components: {},
     data() {
       return {
+        appInfo: {},
         test: "",
         test1: "",
       };
     },
     mounted() {
+      this.getAppInfo(this.$route.params.shortCode);
       if (/(iphone|ipad|ipod|ios)/i.test(ua)) {
         this.test = "ios";
       } else if (/(android)/i.test(ua)) {
@@ -73,6 +75,15 @@
     methods: {
       isWeChat() {
         return ua.indexOf("micromessenger") !== -1;
+      },
+      getAppInfo(shortCode) {
+        this.contentLoading = true;
+        this.$http.get(`apps/shortCode/${shortCode}`).then(res => {
+          this.contentLoading = false;
+          this.appInfo = res.data;
+        }).catch(() => {
+          this.contentLoading = false;
+        });
       },
     },
   };

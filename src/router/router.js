@@ -15,22 +15,23 @@ const routes = [
     ],
   },
   {path: "/login", meta: {title: "登录"}, component: () => import("@/views/main/Login")},
-  {path: "/preview", meta: {title: "预览"}, component: () => import("@/views/appDetail/Preview")},
+  {path: "/:shortCode", meta: {title: "下载页"}, component: () => import("@/views/appDetail/Preview")},
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes,
 });
 
 //const whiteUris = ["/login"]; // 白名单,无需登录即可访问
 
 router.beforeEach((to, from, next) => {
-/*  if (whiteUris.indexOf(to.path) !== -1 || loginUtil.isLogin()) {
-    // 在白名单当中或者已经登录,放行
-    next();
-  } else {
-    toLogin(to.fullPath);
-  }*/
+  /*  if (whiteUris.indexOf(to.path) !== -1 || loginUtil.isLogin()) {
+      // 在白名单当中或者已经登录,放行
+      next();
+    } else {
+      toLogin(to.fullPath);
+    }*/
   next();
 });
 
