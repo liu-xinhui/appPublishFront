@@ -1,5 +1,6 @@
 import axios from "axios";
 import auth from "@/util/loginUtil";
+import {toLogin} from "@/router/router";
 import {Notification} from "element-ui";
 
 // axios 配置
@@ -29,6 +30,9 @@ axios.interceptors.response.use(
       // that falls out of the range of 2xx
       console.log(error.response.data, error.response.status, error.response.headers);
       Notification.error({title: "提示", message: error.response.data.message});
+      if (error.response.status === 401) {
+        toLogin();
+      }
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

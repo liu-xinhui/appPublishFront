@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-//import loginUtil from "@/util/loginUtil";
 
 Vue.use(VueRouter);
 
@@ -21,18 +20,6 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   routes,
-});
-
-//const whiteUris = ["/login"]; // 白名单,无需登录即可访问
-
-router.beforeEach((to, from, next) => {
-  /*  if (whiteUris.indexOf(to.path) !== -1 || loginUtil.isLogin()) {
-      // 在白名单当中或者已经登录,放行
-      next();
-    } else {
-      toLogin(to.fullPath);
-    }*/
-  next();
 });
 
 export const toLogin = () => {
