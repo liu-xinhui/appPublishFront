@@ -90,8 +90,7 @@
         window.open(window.config.serverUrl + "apps/downloadApk/" + filename);
       },
       gotoPreview() {
-        let routeData = this.$router.resolve({path: "/preview", query: {id: 1}});
-        window.open(routeData.href, "_blank");
+        window.open("/" + this.appInfo.shortCode, "_blank");
       },
     },
   };

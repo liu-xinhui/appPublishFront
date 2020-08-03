@@ -11,30 +11,37 @@
                 <i class="icon-icon_path bg-path"/>
                 <span class="icon">
                   <img
-                      src="https://ali-fir-pro-icon.jappstore.com/9f1f4dc5e05d613e3808d008cdcbe8650bdcd73c?auth_key=1595820260-0-0-ee2ccd2b4a7a94b763446296f0e1cede"
-                      itemprop="image">
+                      itemprop="image"
+                      alt="图标"
+                      width="100"
+                      height="100"
+                      :src="appInfo.currentVersion.icon||'/img/app.png'">
                 </span>
-                <span class="qrcode" title=""><canvas width="200" height="200" style="display: none;"/><img
-                    alt="Scan me!"
-                    style="display: block;"
-                    src="data:image/png;base64,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"></span>
+                <span class="qrcode" title=""><canvas width="200" height="200" style="display: none;"/>
+                  <qr-code
+                      v-if="url"
+                      :value="url"
+                      :options="qrCodeOptions"/>
+                </span>
               </div>
-              <p class="release-type wrapper">&nbsp;</p>
               <h1 class="name wrapper" style="margin-top: 60px">
                 <span class="icon-warp">
                   <i class="icon-android"/>
-                  中昊电梯
+                  {{appInfo.name}}
                 </span>
               </h1>
               <p class="scan-tips">
-                扫描二维码下载<br>或用手机浏览器输入这个网址:&nbsp;&nbsp;<span class="text-black">http://fir.sout.fun/zhhwb</span>
+                扫描二维码下载<br>或用手机浏览器输入这个网址:&nbsp;&nbsp;<span class="text-black">{{url}}</span>
               </p>
               <div class="release-info">
-                <p><span itemprop="softwareVersion">0.2.5 (Build 25)- 16.20 MB</span></p>
-                <p>更新于: <span itemprop="datePublished">2020-07-14 16:19</span></p>
+                <p itemprop="softwareVersion">
+                  {{appInfo.currentVersion.versionName+"（Build " +appInfo.currentVersion.versionCode+"）-"}}
+                  {{(appInfo.currentVersion.size/1024).toFixed(2)}} MB
+                </p>
+                <p>更新于: <span itemprop="datePublished">{{appInfo.currentVersion.createTime}}</span></p>
               </div>
               <div id="actions" class="actions type-android">
-                <button onclick="FIR.install()">下载安装</button>
+                <button @click="install">下载安装</button>
               </div>
             </div>
           </div>
@@ -48,34 +55,49 @@
   </div>
 </template>
 <script>
+  import QrCode from "@chenfengyuan/vue-qrcode";
+
   const ua = navigator.userAgent.toLowerCase();
 
   export default {
-    components: {},
+    components: {QrCode},
     data() {
       return {
-        appInfo: {},
-        test: "",
-        test1: "",
+        appInfo: {
+          currentVersion: {},
+        },
+        qrCodeOptions: {
+          width: 100,
+          margin: 0,
+          color: {
+            dark: "#404242",
+            light: "#0000",
+          },
+        },
+        platform: null,
+        isWebChat: null,
       };
+    },
+    computed: {
+      url() {
+        let shortCode = this.appInfo.shortCode;
+        return shortCode ? (document.location.protocol + "//" + window.location.host + "/" + shortCode) : "";
+      },
     },
     mounted() {
       this.getAppInfo(this.$route.params.shortCode);
       if (/(iphone|ipad|ipod|ios)/i.test(ua)) {
-        this.test = "ios";
+        this.platform = "ios";
       } else if (/(android)/i.test(ua)) {
-        this.test = "android";
+        this.platform = "android";
       } else {
-        this.test = "pc";
+        this.platform = "pc";
       }
-      if (this.isWeChat()) {
-        this.test1 = "weixin";
+      if (ua.indexOf("micromessenger") !== -1) {
+        this.isWebChat = true;
       }
     },
     methods: {
-      isWeChat() {
-        return ua.indexOf("micromessenger") !== -1;
-      },
       getAppInfo(shortCode) {
         this.contentLoading = true;
         this.$http.get(`apps/shortCode/${shortCode}`).then(res => {
@@ -84,6 +106,12 @@
         }).catch(() => {
           this.contentLoading = false;
         });
+      },
+      install() {
+        if (this.platform === "ios") {
+          window.location.href = this.appInfo.iosUrl;
+        }
+        this.$message.success(this.platform);
       },
     },
   };
