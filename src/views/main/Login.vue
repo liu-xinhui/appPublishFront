@@ -57,10 +57,10 @@
           if (valid) {
             this.loading = true;
             this.$http
-              .getPermission("/permission/api/user/signin", this.user)
+              .getPermission("account/login", this.user)
               .then(data => {
+                this.loading = false;
                 loginUtil.login(data);
-                this.cacheData();
               })
               .catch(() => {
                 this.loading = false;
