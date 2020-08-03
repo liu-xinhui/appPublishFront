@@ -109,9 +109,25 @@
       },
       install() {
         if (this.platform === "ios") {
-          window.location.href = this.appInfo.iosUrl;
+          let iosUrl = this.appInfo.iosUrl;
+          if (iosUrl) {
+            window.location.href = iosUrl;
+          } else {
+            this.$message.error("该app不支持ios系统");
+          }
+        } else if (this.platform === "android") {
+          if (this.isWebChat) {
+            this.$message.error("请在浏览器中打开页面");
+          } else {
+            this.download();
+          }
+        } else {
+          this.download();
         }
         this.$message.success(this.platform);
+      },
+      download() {
+        window.open(window.config.serverUrl + "apps/downloadApk/" + this.appInfo.currentVersion.downloadUrl);
       },
     },
   };
