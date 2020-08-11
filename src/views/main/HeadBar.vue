@@ -2,17 +2,17 @@
   <header class="header-wrapper">
     <div class="header">
       <div class="header-nav">
-        <div style="font-weight: 600">STEP应用发布</div>
-        <i class="el-icon-arrow-right"/>
-        <div>我的应用</div>
-        <i class="el-icon-arrow-right"/>
-        <div>星辰物联网</div>
+        <div style="font-weight: 600;cursor: pointer" @click="goto('/')">STEP应用发布</div>
+        <template v-for="(item,index) in nav">
+          <i :key="index" class="el-icon-arrow-right"/>
+          <div :key="index" :style="{cursor:item.path?'pointer':'auto'}" @click="goto(item.path)">{{item.name}}</div>
+        </template>
       </div>
       <div style="flex: 1"/>
       <div class="avatar">
         <img src="http://avatar-file.flow.ci/avatar/8cd0609795fe169c5210477837fcdfa1.png?r=PG" alt="头像">
-        <span class="name">liunewshine</span>
-        <span class="logout">注销</span>
+        <span class="name">{{username}}</span>
+        <span class="logout" @click="logout">注销</span>
       </div>
     </div>
   </header>
@@ -20,26 +20,35 @@
 
 <script>
   import auth from "@/util/loginUtil";
+  import {store} from "@/store/store";
 
   export default {
     components: {},
     data() {
       return {
-        name: auth.getUsername(),
-        nav: [
-          {
-            name: "我的应用",
-            path: "/",
-          },
-          {
-            name: "星辰物联网",
-            path: "/",
-          },
-        ],
+        username: auth.getUsername(),
       };
+    },
+    computed: {
+      nav() {
+        return store.breadcrumbs;
+      },
     },
     methods: {
       logout() {
+        this.$confirm("确定退出登录吗?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }).then(() => {
+          auth.logout();
+          this.$router.push({path: "/login"});
+        });
+      },
+      goto(path) {
+        if (path) {
+          this.$router.push({path});
+        }
       },
     },
   };
@@ -106,6 +115,7 @@
         font-size: 12px;
         color: #9b9b9b;
         bottom: 13px;
+        cursor: pointer;
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="contentLoading" class="main-home">
+  <div v-loading="contentLoading" class="main-home" element-loading-background="rgba(0, 0, 0, 0)">
     <el-upload
         ref="upload"
         class="card upload"
@@ -12,6 +12,7 @@
         :on-progress="uploadProgress"
         :on-success="uploadSuccess"
         :data="uploadAppInfo"
+        :headers="auth"
         :action="uploadUrl">
       <div class="upload-text">
         <i class="el-icon-upload"/>
@@ -20,10 +21,12 @@
     </el-upload>
     <div v-for="item in appList" :key="item.id" class="card app">
       <img
+          style="cursor:pointer;"
           alt="图标"
           width="100"
           height="100"
-          :src="item.currentVersion.icon">
+          :src="item.currentVersion.icon"
+          @click="toVersion(item.id)">
       <div class="app-name">{{item.name}}</div>
       <table>
         <tr>
@@ -41,7 +44,7 @@
       </table>
       <div class="app-btn">
         <el-button icon="el-icon-edit" round @click="toVersion(item.id)">编辑</el-button>
-        <el-button icon="el-icon-view" round style="margin-left: 10px">预览</el-button>
+        <el-button icon="el-icon-view" round style="margin-left: 10px" @click.stop="gotoPreview(item)">预览</el-button>
       </div>
     </div>
     <app-upload-dialog
@@ -53,6 +56,8 @@
 
 <script>
   import AppUploadDialog from "@/views/appList/AppUploadDialog";
+  import {mutations} from "@/store/store";
+  import auth from "@/util/loginUtil";
 
   export default {
     components: {AppUploadDialog},
@@ -62,9 +67,15 @@
         appList: [],
         uploadUrl: window.config.serverUrl + "apps/upload",
         uploadAppInfo: null,
+        auth: {
+          authorization: auth.getToken(),
+        },
       };
     },
     mounted() {
+      mutations.setBreadcrumbs([{
+        name: "我的应用",
+      }]);
       this.getAppList();
     },
     methods: {
@@ -92,6 +103,7 @@
       uploadSuccess() {
         this.$refs.appUploadDialog.close();
         this.$message.success("上传成功");
+        this.getAppList();
       },
       onAppInfo(appInfo) {
         this.uploadAppInfo = appInfo;
@@ -100,6 +112,9 @@
         this.$router.push({
           path: "/apps/" + id,
         });
+      },
+      gotoPreview(item) {
+        window.open("/" + item.shortCode, "_blank");
       },
     },
   };
@@ -119,7 +134,6 @@
     .card {
       margin: 12px;
       width: 30.5%;
-      cursor: pointer;
       height: 430px;
       background-color: #fff;
       padding: 0;
@@ -145,6 +159,7 @@
 
     .upload {
       background-color: $color-primary;
+      cursor: pointer;
 
       i {
         color: white;

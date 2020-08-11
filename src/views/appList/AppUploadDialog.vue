@@ -5,8 +5,7 @@
       :close-on-click-modal="false"
       :visible.sync="dialogVisible"
       top="3vh"
-      width="600px"
-      @close="$reset('form')">
+      width="600px">
     <el-form
         ref="form"
         v-loading="contentLoading"
@@ -67,6 +66,9 @@
         if (this.checkApk(file.name)) {
           this.dialogVisible = true;
           this.contentLoading = true;
+          this.model.changeLog = "";
+          this.uploading = false;
+          this.uploadBtnText = "开始上传";
           let AppInfoParser = require("app-info-parser");
           let parser = new AppInfoParser(file.raw);
           parser.parse().then(result => {
@@ -87,6 +89,7 @@
       },
       close() {
         this.dialogVisible = false;
+
       },
       checkApk(fileName) {
         let pos = fileName.lastIndexOf(".");

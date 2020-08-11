@@ -49,7 +49,7 @@
       </header>
       <!-- Release list -->
       <div class="footer">
-        <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #A9B1B3">鲁ICP备19001203号-1----{{test}},{{test1}}</a>
+        <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #A9B1B3">沪ICP备13031758号</a>
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@
         this.$message.success(this.platform);
       },
       download() {
-        window.open(window.config.serverUrl + "apps/downloadApk/" + this.appInfo.currentVersion.downloadUrl);
+        window.open(window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id);
       },
     },
   };

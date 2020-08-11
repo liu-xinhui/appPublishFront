@@ -28,7 +28,8 @@
       </el-card>
     </div>
     <div class="copyright">
-      © 2020-{{new Date().getFullYear()}} 新时达 版权所有
+      © 2020-{{new Date().getFullYear()}} 新时达版权所有
+      <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #FFF">沪ICP备13031758号</a>
     </div>
   </div>
 </template>
@@ -56,11 +57,11 @@
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true;
-            this.$http
-              .getPermission("account/login", this.user)
-              .then(data => {
+            this.$http.get("account/login", this.user)
+              .then(res => {
                 this.loading = false;
-                loginUtil.login(data);
+                loginUtil.login(res.data);
+                this.$router.push({path: "/"});
               })
               .catch(() => {
                 this.loading = false;

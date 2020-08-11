@@ -43,13 +43,4 @@ export default {
       data: data,
     });
   },
-  //权限模块使用
-  getPermission: function(url, params) {
-    return axios({
-      url: url,
-      baseURL: window.config.serverUrlPermission,
-      method: "get",
-      params: params,
-    });
-  },
 };
