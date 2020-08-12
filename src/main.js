@@ -5,9 +5,6 @@ import "./plugins/element.js";
 import "./plugins/myPlugin.js";
 import "normalize.css";
 import "./style/main.scss";
-import vConsole from "vconsole";
-
-Vue.use(new vConsole());
 
 Vue.config.productionTip = false;
 
