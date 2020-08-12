@@ -47,7 +47,7 @@
           </div>
         </div>
       </header>
-      <div v-if="weChatTipShow" class="we-chat-tip">
+      <div v-if="tipShow" class="we-chat-tip">
         <div class="we-chat-tip-arrow"/>
         请点击右上角<br>选择"在浏览器打开"
       </div>
@@ -84,7 +84,8 @@
         },
         platform: null,
         isWeChat: null,
-        weChatTipShow: true,
+        isQQ: null,
+        tipShow: false,
         installText: "下载安装",
       };
     },
@@ -105,6 +106,8 @@
       }
       if (ua.indexOf("micromessenger") !== -1) {
         this.isWeChat = true;
+      } else if (ua.match(/qq\/[0-9]/i)) {
+        this.isQQ = true;
       }
     },
     methods: {
@@ -126,9 +129,9 @@
             this.installText = "该app不支持ios";
           }
         } else if (this.platform === "android") {
-          if (this.isWeChat) {
-            this.installText = "微信/QQ中无法下载，请点击右上角选择\"在浏览器打开\"";
-            this.weChatTipShow = true;
+          if (this.isWeChat || this.isQQ) {
+            this.installText = (this.isWeChat ? "微信" : "QQ") + "中无法下载，请点击右上角选择\"在浏览器打开\"";
+            this.tipShow = true;
           } else {
             this.download();
           }
@@ -153,7 +156,7 @@
     color: white;
     z-index: 1000;
     padding: 8px 10px;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 20px;
   }
 
@@ -164,11 +167,11 @@
     border-bottom-color: #3ab2a8;
     position: absolute;
     top: -35%;
-    right: 5%;
+    right: 3%;
   }
 
   .install-btn {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 20px;
   }
 
