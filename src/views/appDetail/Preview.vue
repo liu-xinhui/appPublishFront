@@ -49,7 +49,7 @@
       </header>
       <div v-if="weChatTipShow" class="we-chat-tip">
         <div class="we-chat-tip-arrow"/>
-        请点击右上角<br>选择"浏览器中打开"
+        请点击右上角<br>选择"在浏览器打开"
       </div>
       <div class="footer">
         <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #A9B1B3">沪ICP备13031758号</a>
@@ -127,7 +127,7 @@
           }
         } else if (this.platform === "android") {
           if (this.isWeChat) {
-            this.installText = "微信/QQ中无法下载，请点击右上角选择\"浏览器中打开\"";
+            this.installText = "微信/QQ中无法下载，请点击右上角选择\"在浏览器打开\"";
             this.weChatTipShow = true;
           } else {
             this.download();
