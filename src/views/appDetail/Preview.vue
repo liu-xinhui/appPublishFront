@@ -1,7 +1,7 @@
 <template>
-  <div class="preview">
-    <span class="pattern left"><img src="https://ali-static.jappstore.com/images/download_pattern_left.png"></span>
-    <span class="pattern right"><img src="https://ali-static.jappstore.com/images/download_pattern_right.png"></span>
+  <div v-loading="contentLoading" class="preview" element-loading-background="rgba(0, 0, 0, 0)">
+    <span class="pattern left"><img src="/img/download_pattern_left.png"></span>
+    <span class="pattern right"><img src="/img/download_pattern_right.png"></span>
     <div class="main">
       <header>
         <div class="table-container">
@@ -41,13 +41,16 @@
                 <p>更新于: <span itemprop="datePublished">{{appInfo.currentVersion.createTime}}</span></p>
               </div>
               <div id="actions" class="actions type-android">
-                <button @click="install">下载安装</button>
+                <button @click="install">{{installText}}</button>
               </div>
             </div>
           </div>
         </div>
       </header>
-      <!-- Release list -->
+      <div v-if="weChatTipShow" class="we-chat-tip">
+        <div class="we-chat-tip-arrow"/>
+        请点击右上角<br>选择"浏览器中打开"
+      </div>
       <div class="footer">
         <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #A9B1B3">沪ICP备13031758号</a>
       </div>
@@ -63,8 +66,13 @@
     components: {QrCode},
     data() {
       return {
+        contentLoading: true,
         appInfo: {
-          currentVersion: {},
+          currentVersion: {
+            versionName: "",
+            versionCode: "",
+            size: 0,
+          },
         },
         qrCodeOptions: {
           width: 100,
@@ -75,7 +83,9 @@
           },
         },
         platform: null,
-        isWebChat: null,
+        isWeChat: null,
+        weChatTipShow: false,
+        installText: "下载安装",
       };
     },
     computed: {
@@ -94,7 +104,7 @@
         this.platform = "pc";
       }
       if (ua.indexOf("micromessenger") !== -1) {
-        this.isWebChat = true;
+        this.isWeChat = true;
       }
     },
     methods: {
@@ -113,18 +123,18 @@
           if (iosUrl) {
             window.location.href = iosUrl;
           } else {
-            this.$message.error("该app不支持ios系统");
+            this.installText = "该app不支持ios";
           }
         } else if (this.platform === "android") {
-          if (this.isWebChat) {
-            this.$message.error("请在浏览器中打开页面");
+          if (this.isWeChat) {
+            this.installText = "微信/QQ中无法下载，请点击右上角选择\"浏览器中打开\"";
+            this.weChatTipShow = true;
           } else {
             this.download();
           }
         } else {
           this.download();
         }
-        this.$message.success(this.platform);
       },
       download() {
         window.open(window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id);
@@ -133,6 +143,32 @@
   };
 </script>
 <style lang="scss" scoped>
+  .we-chat-tip {
+    width: 130px;
+    height: 50px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #3ab2a8;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .we-chat-tip-arrow {
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom-color: #3ab2a8;
+    position: absolute;
+    top: -35%;
+    right: 5%;
+  }
+
 
   a, button {
     cursor: pointer

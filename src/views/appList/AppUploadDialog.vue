@@ -130,7 +130,7 @@
     padding: 20px;
     margin-top: 50px;
     background-color: $color-primary;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
     border: none;
     color: white;
     font-size: 20px;
