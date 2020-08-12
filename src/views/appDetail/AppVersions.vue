@@ -80,7 +80,6 @@
           <el-input v-model="appInfo.description" type="textarea" :rows="4"/>
         </el-form-item>
         <el-button :loading="submitLoading" type="warning" class="save-btn" @click="handleSubmit(1)">保存</el-button>
-        <el-button :loading="submitLoading" type="error" class="save-btn" @click="handleSubmit(1)">删除</el-button>
       </div>
       <div v-if="tabActive===2">
         <el-form-item label="ios商店地址" prop="iosUrl" :rules="ruleNotNull" label-width="105px">
