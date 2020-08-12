@@ -41,7 +41,7 @@
                 <p>更新于: <span itemprop="datePublished">{{appInfo.currentVersion.createTime}}</span></p>
               </div>
               <div id="actions" class="actions type-android">
-                <button @click="install">{{installText}}</button>
+                <button class="install-btn" @click="install">{{installText}}</button>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
         },
         platform: null,
         isWeChat: null,
-        weChatTipShow: false,
+        weChatTipShow: true,
         installText: "下载安装",
       };
     },
@@ -144,8 +144,6 @@
 </script>
 <style lang="scss" scoped>
   .we-chat-tip {
-    width: 130px;
-    height: 50px;
     position: fixed;
     top: 10px;
     right: 10px;
@@ -154,9 +152,9 @@
     text-align: center;
     color: white;
     z-index: 1000;
-    padding: 10px;
-    font-size: 14px;
-    line-height: 16px;
+    padding: 8px 10px;
+    font-size: 16px;
+    line-height: 20px;
   }
 
   .we-chat-tip-arrow {
@@ -169,6 +167,10 @@
     right: 5%;
   }
 
+  .install-btn {
+    font-size: 15px;
+    line-height: 20px;
+  }
 
   a, button {
     cursor: pointer
