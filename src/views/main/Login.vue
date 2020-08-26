@@ -3,7 +3,7 @@
     <div class="login-con">
       <el-card>
         <div slot="header">
-          <span>欢迎访问STEP应用发布平台</span>
+          <span>欢迎访问应用发布平台</span>
         </div>
         <el-form ref="loginForm" :model="user" :rules="rules">
           <el-form-item prop="username">
@@ -28,8 +28,8 @@
       </el-card>
     </div>
     <div class="copyright">
-      © 2020-{{new Date().getFullYear()}} 新时达版权所有
-      <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #FFF">沪ICP备13031758号</a>
+      © 2020-{{new Date().getFullYear()}} 版权所有
+      <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #FFF">沪ICP备xxxxxxx号</a>
     </div>
   </div>
 </template>

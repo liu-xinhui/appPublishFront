@@ -2,7 +2,7 @@
   <header class="header-wrapper">
     <div class="header">
       <div class="header-nav">
-        <div style="font-weight: 600;cursor: pointer" @click="goto('/')">STEP应用发布</div>
+        <div style="font-weight: 600;cursor: pointer" @click="goto('/')">应用发布</div>
         <template v-for="(item,index) in nav">
           <i :key="index" class="el-icon-arrow-right"/>
           <div :key="index" :style="{cursor:item.path?'pointer':'auto'}" @click="goto(item.path)">{{item.name}}</div>

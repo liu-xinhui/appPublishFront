@@ -7,7 +7,7 @@ module.exports = {
     config
       .plugin("html")
       .tap(args => {
-        args[0].title = "新时达应用发布";
+        args[0].title = "应用发布";
         return args;
       });
     // 用cdn方式引入
