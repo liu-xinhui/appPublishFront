@@ -140,7 +140,13 @@
         }
       },
       download() {
-        window.open(window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id);
+        //window.open(window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id);
+        let url = window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id;
+        let a = document.createElement("a");
+        a.setAttribute("href", url);
+        a.setAttribute("target", "_blank");
+        document.body.appendChild(a);
+        a.click();
       },
     },
   };
