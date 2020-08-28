@@ -140,7 +140,12 @@
         }
       },
       download() {
-        window.open(window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id);
+        let url = window.config.serverUrl + "appVersions/downloadApk/" + this.appInfo.currentVersion.id;
+        let a = document.createElement("a");
+        a.setAttribute("href", url);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       },
     },
   };
