@@ -117,7 +117,7 @@
         window.open("/" + item.shortCode, "_blank");
       },
       getUrl(item) {
-        return window.location.protocol + "//" + window.location.host + "/" + item.shortCode;
+        return window.location.protocol + "//asdfasdfasdfasdf" + window.location.host + "/" + item.shortCode;
       },
     },
   };
@@ -188,6 +188,7 @@
     }
 
     table {
+      width: 100%;
       font-size: 12px;
 
       td {
@@ -196,13 +197,17 @@
 
       td:last-child {
         padding-left: 10px;
-        color: #1A1A1A
+        color: #1A1A1A;
+        word-break: break-all;
       }
     }
 
     .app-btn {
+      width: 100%;
+      position: absolute;
       text-align: center;
-      margin: 60px auto 0;
+      bottom: 30px;
+      left: 0;
     }
   }
 }
