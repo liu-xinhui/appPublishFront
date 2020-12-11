@@ -117,7 +117,7 @@
         window.open("/" + item.shortCode, "_blank");
       },
       getUrl(item) {
-        return window.location.protocol + "//asdfasdfasdfasdf" + window.location.host + "/" + item.shortCode;
+        return window.location.protocol + "//" + window.location.host + "/" + item.shortCode;
       },
     },
   };

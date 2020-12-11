@@ -116,6 +116,7 @@
         this.$http.get(`apps/shortCode/${shortCode}`).then(res => {
           this.contentLoading = false;
           this.appInfo = res.data;
+          document.title = this.appInfo.name;
         }).catch(() => {
           this.contentLoading = false;
         });

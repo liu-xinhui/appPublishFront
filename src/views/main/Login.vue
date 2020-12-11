@@ -29,7 +29,7 @@
     </div>
     <div class="copyright">
       © 2020-{{new Date().getFullYear()}} 版权所有
-      <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #FFF">沪ICP备xxxxxxx号</a>
+      <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: #FFF">沪ICP备13031758号</a>
     </div>
   </div>
 </template>
